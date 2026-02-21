@@ -1,0 +1,142 @@
+.right_conatct_social_icon {
+  background: linear-gradient(to top right, #000000 -5%, #333333 100%);
+}
+.contact_us {
+  background-color: #0f0f0f;
+  padding: 120px 0px;
+}
+
+.contact_inner {
+  background-color: #3b3b3b;
+  position: relative;
+  border-radius: 25px;
+}
+.contact_field {
+  padding: 60px 340px 90px 100px;
+}
+.right_conatct_social_icon {
+  height: 100%;
+}
+
+.contact_field h3 {
+  color: #fff;
+  font-size: 40px;
+  letter-spacing: 1px;
+  font-family: "Kode Mono", monospace;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+.contact_field p {
+  color: #fff;
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 1px;
+  margin-bottom: 35px;
+}
+.contact_field .form-control {
+  border-radius: 0px;
+  border: none;
+  border-bottom: 1px solid #ccc;
+  background: transparent;
+  margin: 15px 0;
+  width: 100%;
+  color: #fff;
+}
+.contact_field .form-control:focus {
+  box-shadow: none;
+  outline: none;
+  border-bottom: 2px solid #1325e8;
+}
+.contact_field .form-control::placeholder {
+  font-size: 13px;
+  letter-spacing: 1px;
+  color: #fff;
+}
+
+.contact_info_sec {
+  position: absolute;
+  background-color: #2d2d2d;
+  right: 1px;
+  top: 18%;
+  height: 340px;
+  width: 340px;
+  padding: 40px;
+  border-radius: 25px 0 0 25px;
+}
+.contact_info_sec h4 {
+  letter-spacing: 1px;
+  padding-bottom: 15px;
+}
+
+.info_single {
+  margin: 30px 0px;
+}
+.info_single i {
+  margin-right: 15px;
+}
+.info_single span {
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+
+button.contact_form_submit {
+  background: linear-gradient(to top right, #040404 -5%, #666666 100%);
+  border: none;
+  color: #fff;
+  padding: 10px 15px;
+  width: 35%;
+  margin: 0;
+  margin-top: 25px;
+  border-radius: 35px;
+  cursor: pointer;
+  font-size: 16px;
+  letter-spacing: 2px;
+}
+
+.social-icons a {
+  margin: 10px 12px;
+}
+
+.social-icons a svg {
+  width: 28px !important;
+  height: 28px !important;
+}
+ul.country-list{
+    background-color: #2d2d2d !important;
+}
+.react-tel-input .country-list .country:hover,.react-tel-input .country-list .country.highlight {
+    background-color: #000 !important;
+}
+@media (max-width: 1366px) {
+  .social-icons a {
+    margin: 10px 8px;
+  }
+}
+
+@media (max-width: 1180px) {
+  .contact_field {
+    padding: 60px 240px 90px 50px;
+  }
+  .social-icons a svg {
+    width: 20px !important;
+    height: 20px !important;
+  }
+  .social-icons a {
+    margin: 8px 8px;
+  }
+}
+
+@media (max-width: 991px) {
+    .right_conatct_social_icon {
+    height: inherit;
+}
+}
+
+@media (max-width: 661px) {
+    .contact_field {
+    padding: 20px;
+}
+.contact_info_sec{
+    position: static;
+}
+}

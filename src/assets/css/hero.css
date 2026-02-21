@@ -1,0 +1,66 @@
+section.hero {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  background-color: #000;
+}
+
+.dynemic-contant {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.dynemic-contant h1 {
+  font-size: 75px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.dynemic-contant span {
+  font-size: 38px;
+  letter-spacing: 1px;
+}
+
+.dynemic-contant span {
+  font-size: 40px;
+  font-weight: 900;
+  letter-spacing: 5px;
+  color: #fff;
+  text-shadow: 0 4px 14px rgba(30, 97, 219, 0.8);
+  font-family: "Kode Mono", monospace;
+}
+
+.dynemic-contant h4 {
+  font-size: 35px;
+  color: #ffffff;
+}
+
+.dynemic-contant .social-icons a svg {
+  width: 40px !important;
+  height: 40px !important;
+  fill: #fff;
+  margin: 10px 5px;
+}
+@media (max-width: 991px) {
+  .dynemic-contant h1 {
+    font-size: 70px;
+  }
+}
+
+@media (max-width: 767px) {
+  .dynemic-contant h1 {
+    font-size: 32px;
+  }
+  .dynemic-contant span {
+    font-size: 25px;
+  }
+  .dynemic-contant h4 {
+    font-size: 22px;
+  }
+  .about-content-wrapper::before {
+    font-size: 3rem;
+  }
+  h2.about-title {
+    margin-top: 25px;
+}
+}

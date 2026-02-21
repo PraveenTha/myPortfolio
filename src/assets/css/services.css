@@ -1,0 +1,88 @@
+.services-wrapper{
+  text-align: right;
+}
+.services-wrapper:before {
+    color: #f2f2f27e;
+    content: "...Services";
+    font-family: Gill Sans, Gill Sans MT, Calibri, Trebuchet MS, sans-serif;
+    font-family: "Kode Mono", monospace;
+    font-size: 10em;
+    font-weight: 700;
+    right: 0;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.service-card {
+ background: rgba(255, 255, 255, 0.2);
+border-radius: 16px;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(7.8px);
+-webkit-backdrop-filter: blur(7.8px);
+border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 25px;
+  border-radius: 12px;
+  text-align: center;
+  transition: 0.3s;
+}
+
+.service-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 15px rgba(173, 219, 219, 0.15);
+}
+
+.service-icon {
+  font-size: 32px;
+  color: #0dcaf0;
+  margin-bottom: 10px;
+}
+
+.service-card ul {
+  padding-left: 18px;
+  text-align: left;
+}
+
+.service-card li {
+  font-size: 16px;
+  margin-bottom: 6px;
+  color: #ccc;
+}
+.service-card li i {
+  margin-right: 5px;
+}
+
+@media (max-width: 1366px) {
+ .services-wrapper:before{
+    font-size: 7rem;
+  }
+   .service-card{
+  padding: 20px;
+ }
+}
+
+/* Tablet */
+@media (max-width: 1180px) {
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+
+@media (max-width: 991px) {
+    .services-wrapper:before {
+        font-size: 5rem;
+    }
+  }
+
+@media (max-width: 767px) {
+    .services-wrapper:before {
+        font-size: 3rem;
+    }
+        .services-grid {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}

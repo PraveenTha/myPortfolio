@@ -1,0 +1,160 @@
+/* =====================
+   Experience Section (CodePen Style)
+===================== */
+.exp-wrapper {
+  position: relative;
+}
+.exp-wrapper:before {
+  color: #f2f2f27e;
+  content: "Experience";
+  font-family:
+    Gill Sans,
+    Gill Sans MT,
+    Calibri,
+    Trebuchet MS,
+    sans-serif;
+  font-family: "Kode Mono", monospace;
+  font-size: 10em;
+  font-weight: 700;
+  right: 0;
+  position: relative;
+}
+
+.experience-section {
+  padding: 80px 0;
+  background: #0f0f0f;
+  color: #fff;
+}
+
+.exp-title {
+  text-align: center;
+  font-size: 36px;
+  font-weight: bold;
+  margin-bottom: 50px;
+  color: #00eaff;
+  text-transform: uppercase;
+}
+
+.exp-container {
+  position: relative;
+  margin: auto;
+  padding-left: 30px; /* line left */
+}
+
+/* Vertical line */
+.exp-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 15px;
+  width: 4px;
+  height: 100%;
+  background: #f2f2f2;
+}
+
+/* EACH CARD */
+.exp-card {
+  position: relative;
+  margin-bottom: 40px;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s ease-out;
+}
+
+.exp-card.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ICON / BULLET */
+.exp-icon {
+  position: absolute;
+  left: -23px;
+  top: 0;
+  width: 20px;
+  height: 20px;
+  background: #0f0f0f;
+  border: 4px solid #f2f2f2;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.exp-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+/* CONTENT BOX */
+.exp-content img {
+  width: 135px;
+}
+.exp-content {
+  background: #111;
+  padding: 20px 25px;
+  border-radius: 8px;
+  margin-left: 50px;
+  box-shadow: 0 0 15px rgba(232, 247, 247, 0.15);
+  border-left: 4px solid #f2f2f2;
+}
+
+.exp-role {
+  font-size: 20px;
+  margin: 0;
+  color: #00eaff;
+}
+
+.exp-company {
+  font-size: 17px;
+  margin: 2px 0 8px 0;
+  color: #fff;
+}
+
+.exp-duration {
+  font-size: 13px;
+  color: #00eaff;
+  font-weight: 500;
+}
+
+.exp-desc {
+  font-size: 15px;
+  color: #e0e0e0;
+  margin-top: 8px;
+}
+
+/* RESPONSIVE */
+
+
+@media (max-width: 1366px) {
+  .exp-wrapper:before{
+    font-size: 7rem;
+  }
+}
+@media (max-width: 991px) {
+    .exp-wrapper:before {
+        font-size: 5rem;
+    }
+}
+@media (max-width: 768px) {
+  .exp-container {
+    padding-left: 10px;
+  }
+.exp-icon {
+    left: -3px;
+  }
+  .exp-content {
+    margin-left: 45px;
+  }
+}
+
+@media (max-width: 767px) {
+ .exp-wrapper:before {
+        font-size: 3rem;
+    }
+    .exp-content{
+      margin-top: 25px;
+    }
+}
