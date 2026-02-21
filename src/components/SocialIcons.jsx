@@ -1,7 +1,7 @@
 import * as FaIcons from "react-icons/fa";
 import * as SiIcons from "react-icons/si";
-import axios from "axios";
 import { useEffect, useState } from "react";
+import api from "../services/api"; // 🔥 use central api
 
 const ICON_MAP = {
   ...FaIcons,
@@ -12,14 +12,20 @@ const SocialIcons = () => {
   const [socials, setSocials] = useState([]);
 
   useEffect(() => {
-    axios
-      .get("http://localhost:5000/api/admin/settings")
-      .then((res) => {
+    const fetchSocials = async () => {
+      try {
+        const res = await api.get("/admin/settings"); 
+        // baseURL already contains /api
+
         if (res.data?.socials) {
           setSocials(res.data.socials.filter((s) => s.enabled));
         }
-      })
-      .catch(() => {});
+      } catch (err) {
+        console.error("Social fetch failed", err);
+      }
+    };
+
+    fetchSocials();
   }, []);
 
   if (!socials.length) return null;
@@ -30,12 +36,10 @@ const SocialIcons = () => {
         const Icon = ICON_MAP[s.icon];
         if (!Icon || !s.url) return null;
 
-        const href = s.url.startsWith("mailto:") ? s.url : s.url;
-
         return (
           <a
             key={s.platform}
-            href={href}
+            href={s.url}
             target="_blank"
             rel="noreferrer"
             aria-label={s.platform}
