@@ -4,7 +4,7 @@ import RotatingText from "./RotatingText";
 import SocialIcons from "./SocialIcons";
 import "../App.css";
 import "../assets/css/hero.css";
-
+import ParticleImage from "./ParticleImage";
 const Hero = () => {
   const [hero, setHero] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -33,6 +33,7 @@ const Hero = () => {
 
   return (
     <section className="hero">
+      <ParticleImage />
       <div className="container">
         <div className="dynemic-contant">
           <h1>{hero.heading}</h1>
