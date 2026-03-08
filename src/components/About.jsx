@@ -30,11 +30,8 @@ const About = () => {
 
   const imageUrl = about.image || null;
 
-  // 🔥 Google Drive Resume Links
-  const fileId = "1DTLGkPva0hqPdVxLD5mTt1LQ3I-WnHiW";
-
-  const previewLink = `https://drive.google.com/file/d/${fileId}/preview`;
-  const downloadLink = `https://drive.google.com/uc?export=download&id=${fileId}`;
+  // ✅ Resume link now comes from Admin Panel
+  const resumeLink = about.resumeLink || "#";
 
   return (
     <section className="about-section" id="about">
@@ -81,8 +78,9 @@ const About = () => {
 
               {/* RESUME BUTTONS */}
               <div className="mt-3 d-flex gap-3">
+
                 <a
-                  href={previewLink}
+                  href={resumeLink}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn-primary"
@@ -91,11 +89,14 @@ const About = () => {
                 </a>
 
                 <a
-                  href={downloadLink}
+                  href={resumeLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="btn-secondary btn-primary"
                 >
                   Download Resume
                 </a>
+
               </div>
 
             </div>
