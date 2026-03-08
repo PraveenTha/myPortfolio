@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
-import api from "../services/api";   // 🔥 use central api
+import api from "../services/api";
 import RotatingText from "./RotatingText";
 import SocialIcons from "./SocialIcons";
+import ParticleImage from "./ParticleImage";
+
 import "../App.css";
 import "../assets/css/hero.css";
-import ParticleImage from "./ParticleImage";
+
 const Hero = () => {
   const [hero, setHero] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -12,7 +14,6 @@ const Hero = () => {
   useEffect(() => {
     const fetchHero = async () => {
       try {
-        // 🔥 baseURL already contains /api
         const res = await api.get("/admin/hero/public");
         setHero(res.data);
       } catch (err) {
@@ -33,9 +34,16 @@ const Hero = () => {
 
   return (
     <section className="hero">
-      <ParticleImage />
-      <div className="container">
+
+      {/* 🔥 Three.js Particle Background */}
+      <div className="hero-bg">
+        <ParticleImage />
+      </div>
+
+      {/* 🔥 Hero Content */}
+      <div className="container hero-content">
         <div className="dynemic-contant">
+
           <h1>{hero.heading}</h1>
 
           {hero.rotatingTexts?.length > 0 && (
@@ -45,8 +53,10 @@ const Hero = () => {
           {hero.subheading && <h4>{hero.subheading}</h4>}
 
           <SocialIcons />
+
         </div>
       </div>
+
     </section>
   );
 };
