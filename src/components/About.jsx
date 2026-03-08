@@ -125,6 +125,7 @@ const About = () => {
                     href={resumeLink}
                     target="_blank"
                     rel="noopener noreferrer"
+                    download
                     className="btn-secondary btn-primary"
                   >
                     Download Resume
