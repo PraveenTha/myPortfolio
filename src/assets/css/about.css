@@ -4,6 +4,7 @@
   --border: hsl(0, 0%, 100%);
   --button-hover: hsl(280, 25%, 12%);
 }
+
 .about-content-wrapper {
   position: relative;
 }
@@ -41,6 +42,13 @@ h4.about-subtitle span {
   letter-spacing: 2px;
 }
 
+.about-img-box.card {
+  height: 100%;
+}
+.about-img-box.card img{
+object-fit: contain;
+height: 100%;
+}
 .card {
   display: flex;
   flex-direction: column;
@@ -203,16 +211,18 @@ button {
 }
 
 @media (max-width: 991px) {
-    .about-content-wrapper::before {
-        font-size: 5rem;
-    }
+  .about-content-wrapper::before {
+    font-size: 5rem;
+  }
 }
+
 @media (max-width: 767px) {
-    .about-content-wrapper::before {
-        font-size: 3rem;
-       
-    }
-    .about-content.row{
-      margin-top: 25px;
-    }
+  .about-content-wrapper::before {
+    font-size: 3rem;
+
+  }
+
+  .about-content.row {
+    margin-top: 25px;
+  }
 }
