@@ -235,6 +235,16 @@
   .portfolio-wrapper:before {
     font-size: 5rem;
   }
+
+  .lightbox .d-flex {
+    display: block !important;
+  }
+
+  .project-img,
+  .lightbox-content {
+    width: 100%;
+    height: auto;
+  }
 }
 
 @media (max-width: 768px) {
