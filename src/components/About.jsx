@@ -47,7 +47,7 @@ const About = () => {
   if (!about) return null;
 
   const imageUrl = about?.image || null;
-  const resumeLink = about?.resumeLink || "";
+  const resumeLink = about?.resumeFile || "";
 
   return (
 
