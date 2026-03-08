@@ -198,6 +198,26 @@
   color: #fff;
 }
 
+.portfolio-loadmore {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.portfolio-loadmore button {
+  padding: 12px 30px;
+  background: #00ffff;
+  border: none;
+  color: #000;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+
+.portfolio-loadmore button:hover {
+  background: #00cccc;
+}
+
 @media (max-width: 1366px) {
   .portfolio-wrapper:before {
     font-size: 7rem;

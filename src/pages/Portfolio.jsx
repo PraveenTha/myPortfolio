@@ -9,6 +9,8 @@ const Portfolio = () => {
   const [categories, setCategories] = useState(["All"]);
   const [activeCat, setActiveCat] = useState("All");
 
+  const [visibleCount, setVisibleCount] = useState(6); // 🔥 visible cards
+
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
 
@@ -25,9 +27,7 @@ const Portfolio = () => {
         const cats = [
           "All",
           ...new Set(
-            active
-              .map((p) => p.category?.name)
-              .filter(Boolean)
+            active.map((p) => p.category?.name).filter(Boolean)
           ),
         ];
 
@@ -43,6 +43,7 @@ const Portfolio = () => {
   /* ================= FILTER ================= */
   const filterByCategory = (cat) => {
     setActiveCat(cat);
+    setVisibleCount(6); // reset visible
 
     if (cat === "All") {
       setFiltered(projects);
@@ -51,6 +52,11 @@ const Portfolio = () => {
         projects.filter((p) => p.category?.name === cat)
       );
     }
+  };
+
+  /* ================= LOAD MORE ================= */
+  const loadMore = () => {
+    setVisibleCount((prev) => prev + 6);
   };
 
   return (
@@ -73,7 +79,7 @@ const Portfolio = () => {
 
           {/* PROJECT GRID */}
           <div className="portfolio-grid">
-            {filtered.map((p, i) => (
+            {filtered.slice(0, visibleCount).map((p, i) => (
               <div
                 className="project-card"
                 key={p._id}
@@ -84,7 +90,6 @@ const Portfolio = () => {
               >
                 <div className="card__inner">
 
-                  {/* ✅ Direct Cloudinary URL */}
                   {p.image && (
                     <img
                       src={p.image}
@@ -100,10 +105,20 @@ const Portfolio = () => {
                       Read more
                     </button>
                   </div>
+
                 </div>
               </div>
             ))}
           </div>
+
+          {/* VIEW MORE BUTTON */}
+          {visibleCount < filtered.length && (
+            <div className="portfolio-loadmore">
+              <button onClick={loadMore}>
+                View More Projects
+              </button>
+            </div>
+          )}
 
         </div>
 
@@ -116,6 +131,7 @@ const Portfolio = () => {
             setIndex={setActiveIndex}
           />
         )}
+
       </div>
     </section>
   );
