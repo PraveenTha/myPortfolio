@@ -4,45 +4,69 @@ import RotatingText from "./RotatingText";
 import "../assets/css/about.css";
 
 const About = () => {
+
   const [about, setAbout] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+
     const fetchAbout = async () => {
+
       try {
+
         const res = await api.get("/about");
-        setAbout(res.data);
+
+        if (res.data) {
+          setAbout(res.data);
+        }
+
       } catch (err) {
-        console.error("About fetch failed", err);
+
+        console.error("About fetch failed:", err);
+
       } finally {
+
         setLoading(false);
+
       }
+
     };
 
     fetchAbout();
+
   }, []);
 
   if (loading) {
-    return <section className="about-section">Loading...</section>;
+    return (
+      <section className="about-section">
+        Loading...
+      </section>
+    );
   }
 
   if (!about) return null;
 
-  const imageUrl = about.image || null;
-
-  // ✅ Resume link now comes from Admin Panel
-  const resumeLink = about.resumeLink || "#";
+  const imageUrl = about?.image || null;
+  const resumeLink = about?.resumeLink || "";
 
   return (
+
     <section className="about-section" id="about">
+
       <div className="container">
+
         <div className="about-content-wrapper">
+
           <div className="about-content row">
 
             {/* PROFILE IMAGE */}
+
             {imageUrl && (
+
               <div className="about-image col-12 col-md-3">
+
                 <div className="about-img-box card">
+
                   <div className="corner top left"></div>
                   <div className="corner top right"></div>
                   <div className="corner bottom left"></div>
@@ -53,15 +77,21 @@ const About = () => {
                     alt="Profile"
                     loading="lazy"
                   />
+
                 </div>
+
               </div>
+
             )}
 
             {/* TEXT */}
+
             <div className="about-text col-12 col-md-9">
 
               {about.title && (
-                <h2 className="about-title">{about.title}</h2>
+                <h2 className="about-title">
+                  {about.title}
+                </h2>
               )}
 
               {about.rotatingSubtitles?.length > 0 && (
@@ -77,35 +107,45 @@ const About = () => {
               )}
 
               {/* RESUME BUTTONS */}
-              <div className="mt-3 d-flex gap-3">
 
-                <a
-                  href={resumeLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-primary"
-                >
-                  View Resume
-                </a>
+              {resumeLink && (
 
-                <a
-                  href={resumeLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-secondary btn-primary"
-                >
-                  Download Resume
-                </a>
+                <div className="mt-3 d-flex gap-3">
 
-              </div>
+                  <a
+                    href={resumeLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-primary"
+                  >
+                    View Resume
+                  </a>
+
+                  <a
+                    href={resumeLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-secondary btn-primary"
+                  >
+                    Download Resume
+                  </a>
+
+                </div>
+
+              )}
 
             </div>
 
           </div>
+
         </div>
+
       </div>
+
     </section>
+
   );
+
 };
 
 export default About;
