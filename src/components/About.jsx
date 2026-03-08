@@ -49,6 +49,25 @@ const About = () => {
   const imageUrl = about?.image || null;
   const resumeLink = about?.resumeFile || "";
 
+  /* ===== GOOGLE DRIVE LINK CONVERTER ===== */
+
+  let previewUrl = "";
+  let downloadUrl = "";
+
+  if (resumeLink.includes("drive.google.com")) {
+
+    const fileId = resumeLink.split("/d/")[1]?.split("/")[0];
+
+    previewUrl = `https://drive.google.com/file/d/${fileId}/preview`;
+    downloadUrl = `https://drive.google.com/uc?export=download&id=${fileId}`;
+
+  } else {
+
+    previewUrl = resumeLink;
+    downloadUrl = resumeLink;
+
+  }
+
   return (
 
     <section className="about-section" id="about">
@@ -113,7 +132,7 @@ const About = () => {
                 <div className="mt-3 d-flex gap-3">
 
                   <a
-                    href={resumeLink}
+                    href={previewUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="btn-primary"
@@ -122,10 +141,7 @@ const About = () => {
                   </a>
 
                   <a
-                    href={resumeLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    download
+                    href={downloadUrl}
                     className="btn-secondary btn-primary"
                   >
                     Download Resume
