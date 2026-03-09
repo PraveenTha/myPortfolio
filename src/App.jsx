@@ -11,7 +11,8 @@ import Services from "./components/Services";
 import Contact from "./components/Contact";
 
 import Portfolio from "./pages/Portfolio";
-import Blogs from "./pages/Blogs"; // 🔥 NEW
+import Blogs from "./pages/Blogs";
+import BlogDetail from "./pages/BlogDetail";
 
 /* ================= HOME PAGE ================= */
 const Home = () => {
@@ -37,10 +38,6 @@ const Home = () => {
         <Portfolio />
       </section>
 
-        {/* <section className="p-0" id="blogs">
-        <Blogs />
-      </section> */}
-
       <section className="p-0" id="services">
         <Services />
       </section>
@@ -59,11 +56,16 @@ function App() {
       <Header />
 
       <Routes>
-        {/* 🏠 HOME */}
-        <Route path="/" element={<Home />} />
 
-        {/* 📝 BLOG PAGE */}
+        {/* HOME */}
+        <Route path="/*" element={<Home />} />
+
+        {/* BLOG LIST */}
         <Route path="/blogs" element={<Blogs />} />
+
+        {/* BLOG DETAIL */}
+        <Route path="/blog/:slug" element={<BlogDetail />} />
+
       </Routes>
 
       <Footer />
