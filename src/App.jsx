@@ -58,7 +58,7 @@ function App() {
       <Routes>
 
         {/* HOME */}
-        <Route path="/*" element={<Home />} />
+        <Route path="/" element={<Home />} />
 
         {/* BLOG LIST */}
         <Route path="/blogs" element={<Blogs />} />
@@ -72,5 +72,4 @@ function App() {
     </>
   );
 }
-
 export default App;
