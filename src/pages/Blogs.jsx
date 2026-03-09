@@ -6,6 +6,7 @@ import "../assets/css/blog.css";
 const Blogs = () => {
 
   const [blogs, setBlogs] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
 
@@ -15,13 +16,20 @@ const Blogs = () => {
 
         const res = await api.get("/blogs/public/all");
 
-        if (res?.data) {
+        if (Array.isArray(res?.data)) {
           setBlogs(res.data);
+        } else {
+          setBlogs([]);
         }
 
       } catch (err) {
 
-        console.error("Blog fetch error", err);
+        console.error("Blog fetch error:", err);
+        setBlogs([]);
+
+      } finally {
+
+        setLoading(false);
 
       }
 
@@ -30,6 +38,17 @@ const Blogs = () => {
     fetchBlogs();
 
   }, []);
+
+  if (loading) {
+    return (
+      <section className="blog-section">
+        <div className="container">
+          <h2 className="color-white">Blogs</h2>
+          <p className="text-white">Loading blogs...</p>
+        </div>
+      </section>
+    );
+  }
 
   return (
 
@@ -41,7 +60,7 @@ const Blogs = () => {
 
         <div className="row">
 
-          {blogs?.length > 0 ? (
+          {blogs.length > 0 ? (
 
             blogs.map((b) => (
 
@@ -51,7 +70,7 @@ const Blogs = () => {
 
                   <div className="image-wrap">
 
-                    {b?.image && (
+                    {b.image && (
                       <img
                         src={b.image}
                         alt={b.title}
@@ -59,7 +78,7 @@ const Blogs = () => {
                       />
                     )}
 
-                    {b?.createdAt && (
+                    {b.createdAt && (
                       <span className="date-badge">
                         {new Date(b.createdAt).toLocaleDateString("en-US", {
                           month: "short",
@@ -73,9 +92,9 @@ const Blogs = () => {
 
                   <div className="card-body">
 
-                    <h4>{b?.title}</h4>
+                    <h4>{b.title}</h4>
 
-                    <p>{b?.shortDescription}</p>
+                    <p>{b.shortDescription}</p>
 
                     <Link to={`/blog/${b.slug}`} className="read-btn">
                       Read More
