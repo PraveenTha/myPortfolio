@@ -7,6 +7,7 @@ const Blogs = () => {
 
   const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
   useEffect(() => {
 
@@ -25,6 +26,7 @@ const Blogs = () => {
       } catch (err) {
 
         console.error("Blog fetch error:", err);
+        setError("Failed to load blogs");
         setBlogs([]);
 
       } finally {
@@ -39,12 +41,27 @@ const Blogs = () => {
 
   }, []);
 
+  /* ===== Loading State ===== */
+
   if (loading) {
     return (
       <section className="blog-section">
         <div className="container">
           <h2 className="color-white">Blogs</h2>
           <p className="text-white">Loading blogs...</p>
+        </div>
+      </section>
+    );
+  }
+
+  /* ===== Error State ===== */
+
+  if (error) {
+    return (
+      <section className="blog-section">
+        <div className="container">
+          <h2 className="color-white">Blogs</h2>
+          <p className="text-danger">{error}</p>
         </div>
       </section>
     );
@@ -60,7 +77,7 @@ const Blogs = () => {
 
         <div className="row">
 
-          {blogs.length > 0 ? (
+          {blogs?.length > 0 ? (
 
             blogs.map((b) => (
 
@@ -68,9 +85,10 @@ const Blogs = () => {
 
                 <div className="modern-blog-card">
 
+                  {/* IMAGE */}
                   <div className="image-wrap">
 
-                    {b.image && (
+                    {b?.image && (
                       <img
                         src={b.image}
                         alt={b.title}
@@ -78,7 +96,7 @@ const Blogs = () => {
                       />
                     )}
 
-                    {b.createdAt && (
+                    {b?.createdAt && (
                       <span className="date-badge">
                         {new Date(b.createdAt).toLocaleDateString("en-US", {
                           month: "short",
@@ -90,13 +108,17 @@ const Blogs = () => {
 
                   </div>
 
+                  {/* CONTENT */}
                   <div className="card-body">
 
-                    <h4>{b.title}</h4>
+                    <h4>{b?.title}</h4>
 
-                    <p>{b.shortDescription}</p>
+                    <p>{b?.shortDescription}</p>
 
-                    <Link to={`/blog/${b.slug}`} className="read-btn">
+                    <Link
+                      to={`/blog/${b.slug}`}
+                      className="read-btn"
+                    >
                       Read More
                     </Link>
 
@@ -110,9 +132,13 @@ const Blogs = () => {
 
           ) : (
 
-            <p className="text-white text-center mt-5">
-              No blogs available
-            </p>
+            <div className="text-center mt-5">
+
+              <p className="text-white">
+                No blogs available
+              </p>
+
+            </div>
 
           )}
 
