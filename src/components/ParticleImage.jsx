@@ -2,9 +2,13 @@ import { useEffect, useRef } from "react";
 import * as THREE from "three";
 
 const ParticleBackground = () => {
+
   const mountRef = useRef(null);
 
   useEffect(() => {
+
+    if (!mountRef.current) return;
+
     const scene = new THREE.Scene();
 
     const camera = new THREE.PerspectiveCamera(
@@ -16,13 +20,22 @@ const ParticleBackground = () => {
 
     camera.position.z = 5;
 
-    const renderer = new THREE.WebGLRenderer({ alpha: true });
+    const renderer = new THREE.WebGLRenderer({
+      alpha: true,
+      antialias: true
+    });
+
+    renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setSize(window.innerWidth, window.innerHeight);
 
     mountRef.current.appendChild(renderer.domElement);
 
+    /* ===== PARTICLES COUNT (Mobile Optimization) ===== */
+
+    const particlesCount =
+      window.innerWidth < 768 ? 800 : 2000;
+
     const particlesGeometry = new THREE.BufferGeometry();
-    const particlesCount = 2000;
 
     const posArray = new Float32Array(particlesCount * 3);
 
@@ -47,19 +60,61 @@ const ParticleBackground = () => {
 
     scene.add(particlesMesh);
 
+    /* ===== RESIZE FIX ===== */
+
+    const handleResize = () => {
+
+      camera.aspect =
+        window.innerWidth / window.innerHeight;
+
+      camera.updateProjectionMatrix();
+
+      renderer.setSize(
+        window.innerWidth,
+        window.innerHeight
+      );
+
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    /* ===== ANIMATION ===== */
+
+    let animationId;
+
     const animate = () => {
-      requestAnimationFrame(animate);
+
+      animationId = requestAnimationFrame(animate);
 
       particlesMesh.rotation.y += 0.0005;
 
       renderer.render(scene, camera);
+
     };
 
     animate();
 
+    /* ===== CLEANUP ===== */
+
     return () => {
-      mountRef.current.removeChild(renderer.domElement);
+
+      cancelAnimationFrame(animationId);
+
+      window.removeEventListener(
+        "resize",
+        handleResize
+      );
+
+      if (mountRef.current && renderer.domElement) {
+        mountRef.current.removeChild(renderer.domElement);
+      }
+
+      particlesGeometry.dispose();
+      particlesMaterial.dispose();
+      renderer.dispose();
+
     };
+
   }, []);
 
   return (
@@ -75,6 +130,7 @@ const ParticleBackground = () => {
       }}
     />
   );
+
 };
 
 export default ParticleBackground;
