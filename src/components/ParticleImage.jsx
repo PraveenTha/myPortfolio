@@ -9,6 +9,7 @@ const ParticleBackground = () => {
 
     if (!mountRef.current) return;
 
+    /* ===== SCENE ===== */
     const scene = new THREE.Scene();
 
     const camera = new THREE.PerspectiveCamera(
@@ -20,18 +21,18 @@ const ParticleBackground = () => {
 
     camera.position.z = 5;
 
+    /* ===== RENDERER ===== */
     const renderer = new THREE.WebGLRenderer({
       alpha: true,
-      antialias: true
+      antialias: true,
     });
 
-    renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); // ✅ performance safe
     renderer.setSize(window.innerWidth, window.innerHeight);
 
     mountRef.current.appendChild(renderer.domElement);
 
-    /* ===== PARTICLES COUNT (Mobile Optimization) ===== */
-
+    /* ===== PARTICLES COUNT (Responsive Optimization) ===== */
     const particlesCount =
       window.innerWidth < 768 ? 800 : 2000;
 
@@ -50,7 +51,7 @@ const ParticleBackground = () => {
 
     const particlesMaterial = new THREE.PointsMaterial({
       size: 0.02,
-      color: "#00ffff"
+      color: "#00ffff",
     });
 
     const particlesMesh = new THREE.Points(
@@ -60,9 +61,10 @@ const ParticleBackground = () => {
 
     scene.add(particlesMesh);
 
-    /* ===== RESIZE FIX ===== */
-
+    /* ===== RESIZE ===== */
     const handleResize = () => {
+
+      if (!mountRef.current) return;
 
       camera.aspect =
         window.innerWidth / window.innerHeight;
@@ -79,7 +81,6 @@ const ParticleBackground = () => {
     window.addEventListener("resize", handleResize);
 
     /* ===== ANIMATION ===== */
-
     let animationId;
 
     const animate = () => {
@@ -94,25 +95,30 @@ const ParticleBackground = () => {
 
     animate();
 
-    /* ===== CLEANUP ===== */
-
+    /* ===== CLEANUP (FIXED 💥) ===== */
     return () => {
 
-      cancelAnimationFrame(animationId);
+      if (animationId) cancelAnimationFrame(animationId);
 
-      window.removeEventListener(
-        "resize",
-        handleResize
-      );
+      window.removeEventListener("resize", handleResize);
 
-      if (mountRef.current && renderer.domElement) {
-        mountRef.current.removeChild(renderer.domElement);
+      /* ✅ SAFE REMOVE (NO ERROR) */
+      if (
+        mountRef.current &&
+        renderer.domElement &&
+        mountRef.current.contains(renderer.domElement)
+      ) {
+        try {
+          mountRef.current.removeChild(renderer.domElement);
+        } catch (err) {
+          console.log("Cleanup skipped safely");
+        }
       }
 
+      /* ✅ MEMORY CLEANUP */
       particlesGeometry.dispose();
       particlesMaterial.dispose();
       renderer.dispose();
-
     };
 
   }, []);
@@ -126,7 +132,7 @@ const ParticleBackground = () => {
         left: 0,
         width: "100%",
         height: "100%",
-        zIndex: 0
+        zIndex: 0,
       }}
     />
   );
