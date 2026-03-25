@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
 
-const ParticleBackground = () => {
+const ParticleImage = () => {
 
   const mountRef = useRef(null);
 
@@ -9,7 +9,6 @@ const ParticleBackground = () => {
 
     if (!mountRef.current) return;
 
-    /* ===== SCENE ===== */
     const scene = new THREE.Scene();
 
     const camera = new THREE.PerspectiveCamera(
@@ -21,23 +20,21 @@ const ParticleBackground = () => {
 
     camera.position.z = 5;
 
-    /* ===== RENDERER ===== */
     const renderer = new THREE.WebGLRenderer({
       alpha: true,
       antialias: true,
     });
 
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); // ✅ performance safe
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.setSize(window.innerWidth, window.innerHeight);
 
     mountRef.current.appendChild(renderer.domElement);
 
-    /* ===== PARTICLES COUNT (Responsive Optimization) ===== */
+    /* ===== PARTICLES ===== */
     const particlesCount =
       window.innerWidth < 768 ? 800 : 2000;
 
     const particlesGeometry = new THREE.BufferGeometry();
-
     const posArray = new Float32Array(particlesCount * 3);
 
     for (let i = 0; i < particlesCount * 3; i++) {
@@ -95,14 +92,13 @@ const ParticleBackground = () => {
 
     animate();
 
-    /* ===== CLEANUP (FIXED 💥) ===== */
+    /* ===== CLEANUP (FIXED) ===== */
     return () => {
 
       if (animationId) cancelAnimationFrame(animationId);
 
       window.removeEventListener("resize", handleResize);
 
-      /* ✅ SAFE REMOVE (NO ERROR) */
       if (
         mountRef.current &&
         renderer.domElement &&
@@ -111,14 +107,14 @@ const ParticleBackground = () => {
         try {
           mountRef.current.removeChild(renderer.domElement);
         } catch (err) {
-          console.log("Cleanup skipped safely");
+          console.log("Cleanup safe");
         }
       }
 
-      /* ✅ MEMORY CLEANUP */
       particlesGeometry.dispose();
       particlesMaterial.dispose();
       renderer.dispose();
+
     };
 
   }, []);
@@ -139,4 +135,4 @@ const ParticleBackground = () => {
 
 };
 
-export default ParticleBackground;
+export default ParticleImage;
