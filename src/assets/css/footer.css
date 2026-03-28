@@ -1,3 +1,4 @@
+/* ================= FOOTER ================= */
 .site-footer {
   background: #0b0f19;
   color: #cbd5e1;
@@ -12,40 +13,53 @@
   opacity: 0.7;
 }
 
+/* ================= FLOATING CONTACT ================= */
 .floating-contact {
   position: fixed;
   right: 15px;
   bottom: 50px;
   display: flex;
-  flex-direction: column-reverse; /* 👈 email niche rahe */
+  flex-direction: column-reverse; /* Email always bottom */
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   z-index: 999;
 }
 
-/* Common Button Style */
+/* ================= COMMON BUTTON ================= */
 .btn {
   width: 25px;
   height: 25px;
   background: #f2f2f2;
-  color: green;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 50px;
-  font-size: 12px;
   text-decoration: none;
   position: relative;
   transition: all 0.3s ease;
 }
 
-/* Email color black */
+/* ICON SIZE */
+.btn svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* ================= COLORS ================= */
+.call {
+  color: #0d6efd; /* blue */
+}
+
+.whatsapp {
+  color: #25d366; /* green */
+}
+
 .email {
-  color: #000;
+  color: #000; /* black */
   z-index: 2;
 }
 
-/* Hidden buttons initially */
+/* ================= INITIAL HIDE ================= */
 .call,
 .whatsapp {
   opacity: 0;
@@ -53,7 +67,7 @@
   pointer-events: none;
 }
 
-/* Hover on container (mail pe hover karega toh bhi chalega) */
+/* ================= HOVER ANIMATION ================= */
 .floating-contact:hover .call {
   opacity: 1;
   transform: translateY(-10px);
@@ -66,7 +80,7 @@
   pointer-events: auto;
 }
 
-/* Tooltip */
+/* ================= TOOLTIP ================= */
 .btn::after {
   content: attr(data-title);
   position: absolute;
@@ -82,32 +96,44 @@
   transition: 0.3s;
 }
 
-/* Show tooltip on hover */
+/* Show tooltip */
 .btn:hover::after {
   opacity: 1;
   transform: translateX(0);
 }
 
-/* Hover scale */
+/* ================= HOVER EFFECT ================= */
 .btn:hover {
   transform: scale(1.2);
 }
-/* RESPONSIVE */
+
+/* Glow effect */
+.call:hover {
+  box-shadow: 0 0 8px #0d6efd;
+}
+
+.whatsapp:hover {
+  box-shadow: 0 0 8px #25d366;
+}
+
+.email:hover {
+  box-shadow: 0 0 8px #000;
+}
+
+/* ================= RESPONSIVE ================= */
 @media (max-width: 768px) {
-  .footer-container {
-    grid-template-columns: 1fr;
-    text-align: center;
+  .floating-contact {
+    right: 10px;
+    bottom: 20px;
   }
 
-  .footer-socials {
-    justify-content: center;
+  .btn {
+    width: 28px;
+    height: 28px;
   }
 
-  .footer-links {
-    align-items: center;
-  }
-  .floating-contact a svg {
-    width: 25px;
-    height: 25px;
+  .btn svg {
+    width: 16px;
+    height: 16px;
   }
 }
