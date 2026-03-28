@@ -19,7 +19,7 @@
   right: 15px;
   bottom: 50px;
   display: flex;
-  flex-direction: column-reverse; /* Email always bottom */
+  flex-direction: column;
   align-items: center;
   gap: 10px;
   z-index: 999;
@@ -27,7 +27,7 @@
 
 /* ================= COMMON BUTTON ================= */
 .btn {
-  width: 25px;
+  width: 45px;
   height: 25px;
   background: #f2f2f2;
   display: flex;
@@ -56,28 +56,6 @@
 
 .email {
   color: #000; /* black */
-  z-index: 2;
-}
-
-/* ================= INITIAL HIDE ================= */
-.call,
-.whatsapp {
-  opacity: 0;
-  transform: translateY(20px);
-  pointer-events: none;
-}
-
-/* ================= HOVER ANIMATION ================= */
-.floating-contact:hover .call {
-  opacity: 1;
-  transform: translateY(-10px);
-  pointer-events: auto;
-}
-
-.floating-contact:hover .whatsapp {
-  opacity: 1;
-  transform: translateY(-20px);
-  pointer-events: auto;
 }
 
 /* ================= TOOLTIP ================= */
@@ -93,7 +71,7 @@
   white-space: nowrap;
   opacity: 0;
   transform: translateX(10px);
-  transition: 0.3s;
+  transition: 0.3s ease;
 }
 
 /* Show tooltip */
@@ -108,15 +86,15 @@
 }
 
 /* Glow effect */
-.call:hover {
+.call: hover {
   box-shadow: 0 0 8px #0d6efd;
 }
 
-.whatsapp:hover {
+.whatsapp: hover {
   box-shadow: 0 0 8px #25d366;
 }
 
-.email:hover {
+.email: hover {
   box-shadow: 0 0 8px #000;
 }
 
