@@ -12,32 +12,86 @@
   opacity: 0.7;
 }
 
-.floating-contact a svg {
-  width: 30px;
-  height: 33px;
-}
-
-.floating-contact a {
+.floating-contact {
   position: fixed;
-  bottom: 2%;
+  right: 15px;
+  bottom: 50px;
+  display: flex;
+  flex-direction: column-reverse; /* 👈 email niche rahe */
+  align-items: center;
+  gap: 8px;
+  z-index: 999;
 }
 
-.floating-contact a.whatsapp {
-  left: 2%;
-  background: #25d366;
-  padding: 10px;
-  border-radius: 50%;
-  border: 2px solid #fff;
+/* Common Button Style */
+.btn {
+  width: 25px;
+  height: 25px;
+  background: #f2f2f2;
+  color: green;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50px;
+  font-size: 12px;
+  text-decoration: none;
+  position: relative;
+  transition: all 0.3s ease;
 }
 
-.floating-contact a.email {
-  right: 2%;
-  background: #4f7cff;
-  padding: 10px;
-  border-radius: 50%;
-  border: 2px solid #fff;
+/* Email color black */
+.email {
+  color: #000;
+  z-index: 2;
 }
 
+/* Hidden buttons initially */
+.call,
+.whatsapp {
+  opacity: 0;
+  transform: translateY(20px);
+  pointer-events: none;
+}
+
+/* Hover on container (mail pe hover karega toh bhi chalega) */
+.floating-contact:hover .call {
+  opacity: 1;
+  transform: translateY(-10px);
+  pointer-events: auto;
+}
+
+.floating-contact:hover .whatsapp {
+  opacity: 1;
+  transform: translateY(-20px);
+  pointer-events: auto;
+}
+
+/* Tooltip */
+.btn::after {
+  content: attr(data-title);
+  position: absolute;
+  right: 35px;
+  background: #000;
+  color: #fff;
+  font-size: 10px;
+  padding: 3px 6px;
+  border-radius: 4px;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateX(10px);
+  transition: 0.3s;
+}
+
+/* Show tooltip on hover */
+.btn:hover::after {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Hover scale */
+.btn:hover {
+  transform: scale(1.2);
+}
 /* RESPONSIVE */
 @media (max-width: 768px) {
   .footer-container {
