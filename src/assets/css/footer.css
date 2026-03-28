@@ -44,17 +44,16 @@
   width: 14px;
   height: 14px;
   fill:#333;
-
 }
+
+
 
 /* ================= COLORS ================= */
 .call {
   color: #0d6efd; /* blue */
 }
 
-.call svg {
-  color: #0d6efd; /* blue */
-}
+
 
 .whatsapp {
   color: #25d366; /* green */
@@ -89,6 +88,9 @@
 /* ================= HOVER EFFECT ================= */
 .btn:hover {
   transform: scale(1.2);
+}
+.btn:hover svg {
+  fill:#fff;
 }
 
 /* Glow effect */
