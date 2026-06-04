@@ -37,7 +37,7 @@ const Footer = () => {
 
   {/* EMAIL (Main Button) */}
   <a
-    href="mailto:praveentha8@gmail.com"
+    href="mailto:praveendev13101995@gmail.com"
     className="btn email."
     data-title="Email"
   >
