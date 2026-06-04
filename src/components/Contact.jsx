@@ -156,7 +156,7 @@ const Contact = () => {
 
                   <div className="d-flex info_single align-items-center">
                     <i className="fas fa-envelope-open-text"></i>
-                    <a className="text-white" href="mailto:praveenthec@gmail.com" > <span>praveenthec@gmail.com</span> </a>
+                    <a className="text-white" href="mailto:praveendev13101995@gmail.com" > <span>praveendev13101995@gmail.com</span> </a>
                   </div>
 
                   <div className="d-flex info_single align-items-center">
